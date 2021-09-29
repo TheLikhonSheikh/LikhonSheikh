@@ -22,7 +22,7 @@ async def crypto(_, message):
     currency = message.text.split(None, 1)[1].lower()
 
     btn = ikb(
-        {"Available Currencies": "https://plotcryptoprice.herokuapp.com"},
+        {"Available Currencies": "https://t.me/likhonsupport/5"},
     )
 
     m = await message.reply("`Processing...`")
