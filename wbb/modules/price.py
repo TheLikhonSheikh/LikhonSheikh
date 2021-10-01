@@ -6,14 +6,14 @@ from wbb.core.keyboard import ikb
 from wbb.core.sections import section
 from wbb.utils.http import get
 
-__MODULE__ = "token"
+__MODULE__ = "price"
 __HELP__ = """
 /token
         Get Real Time value from currency given.
 """
 
 
-@app.on_message(filters.command("token"))
+@app.on_message(filters.command("price"))
 @capture_err
 async def token(_, message):
     if len(message.command) < 2:
