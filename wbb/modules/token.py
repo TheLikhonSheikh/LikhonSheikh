@@ -8,7 +8,7 @@ from wbb.utils.http import get
 
 __MODULE__ = "token"
 __HELP__ = """
-/token [currency]
+/token
         Get Real Time value from currency given.
 """
 
@@ -17,34 +17,17 @@ __HELP__ = """
 @capture_err
 async def token(_, message):
     if len(message.command) < 2:
-        return await message.reply("/token [currency]")
 
     currency = message.text.split(None, 1)[1].lower()
 
     btn = ikb(
-        {"Available Currencies": "https://t.me/likhonsupport/5"},
+        {"Support": "https://t.me/GodFatherMob"},
     )
 
     m = await message.reply("`Processing...`")
 
-    try:
-        r = await get(
-            "https://api.pancakeswap.info/api/v2/tokens/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
-            timeout=5,
-        )
-    except Exception:
-        return await m.edit("[ERROR]: Something went wrong.")
+    import requests
 
-    if currency not in r:
-        return await m.edit(
-            "[ERROR]: INVALID CURRENCY",
-            reply_markup=btn,
-        )
+data = requests.get("https://api.pancakeswap.info/api/v2/tokens/0x8076C74C5e3F5852037F31Ff0093Eeb8c8ADd8D3").json()
 
-    body = {i.upper(): j for i, j in r.get(currency).items()}
-
-    text = section(
-        "Current Crypto Rates For " + currency.upper(),
-        body,
-    )
-    await m.edit(text, reply_markup=btn)
+print(data["data"]["price"])
